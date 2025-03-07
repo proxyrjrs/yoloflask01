@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Detecção de Objetos em Vídeo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style02.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detecção de Objetos</h1>
+        <h2>Escolha uma das opções</h2>
+        <div class="option">
+            <h3>Captura Ao Vivo</h3>
+            <a href="{{ url_for('live_stream') }}">
+                <button>Ver Streaming Ao Vivo</button>
+            </a>
+        </div>
+        <div class="option">
+            <h3>Upload de Vídeo</h3>
+            <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="video" accept="video/*" required>
+                <button type="submit">Enviar Vídeo</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

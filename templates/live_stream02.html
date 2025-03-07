@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming Ao Vivo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style02.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Streaming Ao Vivo</h1>
+        <div class="video-container">
+            <img src="{{ url_for('live_feed') }}" alt="Live Streaming" id="liveStream">
+        </div>
+        <button id="stopButton">Parar Streaming (q)</button>
+        <a href="{{ url_for('index') }}">
+            <button>Voltar</button>
+        </a>
+    </div>
+    <script>
+        // Função para enviar requisição de parada para o endpoint adequado
+        function stopStreaming() {
+            fetch('/stop_live')
+                .then(response => response.json())
+                .then(data => {
+                    alert("Streaming ao vivo interrompido.");
+                    window.location.href = "/";
+                });
+        }
+        // Listener para o botão de parada
+        document.getElementById('stopButton').addEventListener('click', stopStreaming);
+        // Listener para detectar a tecla "q" ou "Q"
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'q' || e.key === 'Q') {
+                stopStreaming();
+            }
+        });
+    </script>
+</body>
+</html>

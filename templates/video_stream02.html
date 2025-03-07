@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming do Vídeo Enviado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style02.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Streaming do Vídeo</h1>
+        <div class="video-container">
+            <img src="{{ url_for('video_feed_video', filename=filename) }}" alt="Video Streaming" id="videoStream">
+        </div>
+        <button id="stopButton">Parar Streaming (q)</button>
+        <a href="{{ url_for('index') }}">
+            <button>Voltar</button>
+        </a>
+    </div>
+    <script>
+        function stopStreaming() {
+            fetch('/stop_video')
+                .then(response => response.json())
+                .then(data => {
+                    alert("Streaming de vídeo interrompido.");
+                    window.location.href = "/";
+                });
+        }
+        document.getElementById('stopButton').addEventListener('click', stopStreaming);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'q' || e.key === 'Q') {
+                stopStreaming();
+            }
+        });
+    </script>
+</body>
+</html>
